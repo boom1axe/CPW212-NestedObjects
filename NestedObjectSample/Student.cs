@@ -8,8 +8,20 @@ namespace NestedObjectSample
 {
     class Student
     {
+        /// <summary>
+        /// The legal first and last
+        /// ex. J Doe
+        /// </summary>
         public string FullName { get; set; }
+
+        /// <summary>
+        /// The students school provided email address
+        /// </summary>
         public string EmailAddress { get; set; }
+
+        /// <summary>
+        /// Students mailing address
+        /// </summary>
         public string HomeAddress { get; set; }
 
         /// <summary>
