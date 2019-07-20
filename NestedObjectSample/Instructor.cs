@@ -43,8 +43,9 @@ namespace NestedObjectSample
         {
             if(CourseLoad == null)
             {
-                CourseLoad = new
+                CourseLoad = new List<Course>();
             }
+            CourseLoad.Add(c);
         }
     }
 }
