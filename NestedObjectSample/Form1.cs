@@ -16,5 +16,20 @@ namespace NestedObjectSample
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            List<Instructor> instructors = new List<Instructor>();
+
+            PopulateInstructorTestData(instructors);
+
+            lstInstructor.DataSource = instructors;
+            lstInstructor.DisplayMember = nameof(Instructor.FullName);
+        }
+
+        private void PopulateInstructorTestData(List<Instructor> instructors)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
