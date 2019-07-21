@@ -29,7 +29,57 @@ namespace NestedObjectSample
 
         private void PopulateInstructorTestData(List<Instructor> instructors)
         {
-            throw new NotImplementedException();
+            Instructor instructorKen = new Instructor()
+            {
+                Email = "Ken@ctpc.edu",
+                FullName = "Dr. Kenneth Meerdink"
+            };
+
+            List<Course> kenCourses = new List<Course>()
+            {
+                new Course()
+                {
+                    Title = "Data Structures",
+                    CourseNumber = "CPW 245" ,
+                    Roster = new List<Student>()
+                    {
+                        new Student("Jim Halpert"),
+                        new Student("Pam Halpert")
+                    }
+                },
+                new Course()
+                {
+                    Title = "Java II",
+                    CourseNumber = "CPW 143",
+                    Roster = new List<Student>()
+                    {
+                        new Student("Dwight Schrute")
+                    }
+                }
+            };
+
+            instructorKen.CourseLoad = kenCourses;
+
+            instructors.Add(instructorKen);
+
+        }
+
+        private void lstInstructors_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Instructor currInstructor = lstInstructor.SelectedItem as Instructor;
+
+            lstCourses.DisplayMember = nameof(Course.CourseDisplay);
+        }
+
+        private void LstCourses_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstCourses.SelectedIndex < 0)
+                return;
+
+            Course selectedCourse = lstCourses.SelectedItem as Course;
+
+            lstStudents.DataSource = selectedCourse.Roster;
+            lstStudents.DisplayMember = nameof(Student.FullName);
         }
     }
 }
