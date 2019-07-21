@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace NestedObjectSample
 {
+    /// <summary>
+    /// An individual Student
+    /// </summary>
     class Student
     {
         private string _fullName;
