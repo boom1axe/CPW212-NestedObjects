@@ -19,21 +19,23 @@ namespace NestedObjectSample
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            List<Instructor> instructors(PopulateIntructorsTestData(instructor));
+            List<Instructor> instructors = new List<Instructor>();
+
+            PopulateInstructorTestData(instructors);
 
             lstInstructor.DataSource = instructors;
             lstInstructor.DisplayMember = nameof(Instructor.FullName);
         }
 
-        private void PopulateInstructorTestData(List<Instructor>)
+        private void PopulateInstructorTestData(List<Instructor> instructors)
         {
-            Instructor ken = new Instructor()
+            Instructor instructorKen = new Instructor()
             {
                 Email = "Ken@ctpc.edu",
                 FullName = "Dr. Kenneth Meerdink"
             };
 
-            List<Course> kenCourses = new List<Courses>()
+            List<Course> kenCourses = new List<Course>()
             {
                 new Course()
                 {
@@ -48,14 +50,36 @@ namespace NestedObjectSample
                 new Course()
                 {
                     Title = "Java II",
-                    CourseNumber = "CPW 143"
+                    CourseNumber = "CPW 143",
+                    Roster = new List<Student>()
+                    {
+                        new Student("Dwight Schrute")
+                    }
                 }
             };
 
-            InstructorKen.CourseLoad = kenCourses;
+            instructorKen.CourseLoad = kenCourses;
+
+            instructors.Add(instructorKen);
 
         }
 
-        
+        private void lstInstructors_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Instructor currInstructor = lstInstructor.SelectedItem as Instructor;
+
+            lstCourses.DisplayMember = nameof(Course.CourseDisplay);
+        }
+
+        private void LstCourses_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstCourses.SelectedIndex < 0)
+                return;
+
+            Course selectedCourse = lstCourses.SelectedItem as Course;
+
+            lstStudents.DataSource = selectedCourse.Roster;
+            lstStudents.DisplayMember = nameof(Student.FullName);
+        }
     }
 }
